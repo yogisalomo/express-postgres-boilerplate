@@ -1,0 +1,29 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const dotenv_1 = __importDefault(require("dotenv"));
+const routes_1 = __importDefault(require("../api/routes"));
+dotenv_1.default.config();
+const app = (0, express_1.default)();
+const port = process.env.PORT;
+app.use(express_1.default.json());
+// app.get('/', (req: Request, res: Response) => {
+//     const sequelize : Sequelize = new Sequelize('amazevr', 'yogisalomo', '12341234', {
+//         host: 'localhost',
+//         dialect: 'postgres'
+//     });
+//     try {
+//         sequelize.authenticate();
+//         console.log('Connection has been established successfully.');
+//     } catch (error) {
+//         console.error('Unable to connect to the database:', error);
+//     }
+//     res.send('AmazeVR Ticketing by Yogi');
+// });
+app.use('/', routes_1.default);
+app.listen(port, () => {
+    console.log(`Server is running at localhost:${port}`);
+});
